@@ -1,0 +1,1 @@
+[{"id":"4d766da5.3fd0e4","type":"http request","z":"3f7e3a00.e15716","name":"","method":"GET","ret":"txt","paytoqs":"ignore","url":"http://api.openweathermap.org/data/2.5/weather?id=1735634&units=metric&APPID=0ed4e8a4cad5f4f258d82df265a2b978","tls":"","persist":false,"proxy":"","authType":"","x":310,"y":120,"wires":[["ebdf0c94.a791"]]}]
