@@ -1,0 +1,79 @@
+#include <DHT.h>
+#include <ArduinoJson.h>
+#include <ESP8266WiFi.h>
+
+
+#define DHTPIN 4
+#define DHTTYPE DHT11
+#define WIFISSID "AFK_2.4G"
+#define WIFIPWD "alqareem6367s"
+
+
+DHT dht(DHTPIN, DHTTYPE);
+WiFiClient client;
+
+unsigned long previoustime = 0;
+unsigned long now = 0;
+
+void setup() {
+  Serial.begin(115200);
+  setup_wifi();
+
+  dht.begin();
+}
+
+void setup_wifi() 
+{
+  delay(10);
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(WIFISSID);
+
+  WiFi.begin(WIFISSID, WIFIPWD);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+
+void loop() {
+
+  StaticJsonDocument<100> doc;
+
+  long now = millis();
+  if(now - previoustime >= 5000) {
+    previoustime = now;
+    
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+  
+    if (isnan(h) || isnan(t)) {
+      Serial.println("Failed to read from DHT sensor!");
+      return;
+    }
+  
+    Serial.print("Old Format: Humidity: ");
+    Serial.print(h);
+    Serial.print("%  Temperature: ");
+    Serial.print(t);
+    Serial.println("°C ");
+  
+    doc["Humidity"] = h;
+    doc["Temperature"] = t;
+  
+    char buffer[100];
+    
+    serializeJson(doc, buffer);
+    Serial.print("JSON Format: ");
+    Serial.println(buffer);
+  }
+    
+}
