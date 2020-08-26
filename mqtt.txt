@@ -130,18 +130,19 @@ void loop() {
     previoustime = now;
     
     float h = dht.readHumidity();
-
-    vout = analogRead(sensor); 
-    vout = (vout * 500) / 1023;
-    tempc = vout; 
+    float t = dht.readTemperature();
+    
+    if(isnan(h) || isnan(t)) {
+      Serial.println("Failed to read from DHt sensor!");
+      return;
+    }
     
     Serial.print("Temperature: ");
-    Serial.print(tempc);
-    Serial.println(); 
-    Serial.print(F("Humidity: "));
+    Serial.print(t); 
+    Serial.print("Humidity: ");
     Serial.println(h);
 
-    doc["temperature"] = tempc;
+    doc["temperature"] = t;
     doc["humidity"] = h;
 
 //    doc["temperature"] = String(tempc).c_str();
