@@ -19,10 +19,6 @@ PubSubClient client(espClient);
 
 DHT dht(DHTPIN, DHTTYPE);
 
-const int sensor = A0; 
-float tempc; 
-float vout;
-
 unsigned long previoustime = 0; 
 
 void setup() {
@@ -32,8 +28,7 @@ void setup() {
   client.setServer(mqtt_server, 1883);
 
   client.setCallback(callback);
-  
-  pinMode(sensor,INPUT); // Configuring sensor pin as input
+ 
   pinMode(LEDPIN, OUTPUT);
   dht.begin();
 
