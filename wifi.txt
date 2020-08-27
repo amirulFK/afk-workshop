@@ -5,8 +5,8 @@
 
 #define DHTPIN 4
 #define DHTTYPE DHT11
-#define WIFISSID "AFK_2.4G"
-#define WIFIPWD "alqareem6367s"
+#define WIFISSID "SSID"
+#define WIFIPWD "PASSWORD"
 
 
 DHT dht(DHTPIN, DHTTYPE);
