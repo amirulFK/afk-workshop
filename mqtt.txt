@@ -3,11 +3,11 @@
 #include <ArduinoJson.h>
 #include "DHT.h"
 
-#define wifi_ssid "AFK_2.4G"
-#define wifi_password "alqareem6367s"
-#define mqtt_server "amirulfk.my"
-#define mqtt_user "afk-broker"
-#define mqtt_pass "6666666666"
+#define wifi_ssid "SSID"
+#define wifi_password "PASSWORD"
+#define mqtt_server "broker.hivemq.com"
+//#define mqtt_user "MQTT USERNAME"
+//#define mqtt_pass "MQTT PASSWORD"
 
 #define DHTPIN 4
 #define DHTTYPE DHT11
@@ -95,8 +95,8 @@ void reconnect() {
 
    // Attempt to connect
    // If you do not want to use a username and password, change next line to
-   //if (client.connect((char*) clientName.c_str())) {
-   if (client.connect((char*) clientName.c_str(), mqtt_user, mqtt_pass)) {
+   if (client.connect((char*) clientName.c_str())) {
+   //if (client.connect((char*) clientName.c_str(), mqtt_user, mqtt_pass)) {
       Serial.println("connected");
       //once connected, publish an announcement
       client.publish("afk/lamp/status", "Device Connected");
