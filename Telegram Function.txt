@@ -1,0 +1,7 @@
+msg.payload = {
+    "chatId": <your-id>,
+    "type": "message",
+    "content": "abc"
+}
+
+return msg;
