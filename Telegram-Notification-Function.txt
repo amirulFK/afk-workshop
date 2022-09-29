@@ -1,0 +1,15 @@
+var value = msg.payload;
+
+if(value > 80) {
+    if(flow.get("notiSend") == 0) {
+        msg.payload = {
+            "chatId": 331519163,
+            "type": "message",
+            "content": "Lampu terlampau terang!"
+        }
+        flow.set("notiSend", 1);
+        return msg;
+    }
+} else {
+    flow.set("notiSend", 0);
+}
