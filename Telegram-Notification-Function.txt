@@ -3,7 +3,7 @@ var value = msg.payload;
 if(value > 80) {
     if(flow.get("notiSend") == 0) {
         msg.payload = {
-            "chatId": 331519163,
+            "chatId": <your-id>,
             "type": "message",
             "content": "Lampu terlampau terang!"
         }
